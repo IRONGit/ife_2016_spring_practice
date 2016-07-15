@@ -1,4 +1,73 @@
 (function() {
+    var $ = function(element) {
+        return element.indexOf('#') === 0 ? document.querySelector(element) : document.querySelectorAll(element);
+    };
+
+    var Sort = (function() {
+        function sort() {
+            this.seq = [];
+            this.done = false;
+        }
+        sort.prototype = {
+            reset: function() {
+                this.done = false;
+                this.seq.length = 0;
+            },
+            bubbleSort: function(array, elements) {
+                if (array.length !== elements.length || elements.length === 0) {
+                    return;
+                }
+                var me = this;
+                if (me.done) {
+                    alert('already done');
+                    return;
+                }
+                for (var i = 0; i < array.length; i++) {
+                    for (var j = i + 1; j < array.length; j++) {
+                        if (array[i] > array[j]) {
+                            var t = array[i];
+                            array[i] = array[j];
+                            array[j] = t;
+                            //记录每次排序结果
+                            this.seq.push(array.slice());
+                        }
+                    }
+                }
+                var count = 0;
+
+                var parent = elements[0].parentNode;
+
+                clearInterval(window.animation);
+
+                window.animation = setInterval(function() {
+                    parent.innerHTML = '';
+
+                    for (var i = 0; i < me.seq[count].length; i++) {
+                        var num = document.createElement('div');
+
+                        num.className = 'number';
+                        num.style.height = me.seq[count][i] + 'px';
+                        num.style.left = i * 20 + 'px';
+
+                        parent.appendChild(num);
+                    }
+
+                    count++;
+                    if (count === me.seq.length) {
+                        me.done = true;
+                        alert('done');
+                        clearInterval(window.animation);
+                    }
+
+                }, 10);
+            }
+        };
+
+        return {
+            sort: sort
+        };
+    })();
+
     var Utils = (function() {
         return {
             addHandler: function(element, event, handler) {
@@ -60,29 +129,31 @@
     function queue() {
         var me = this;
         this.data = [];
-        this.leftInBtn = document.getElementById('left-in');
-        this.leftOutBtn = document.getElementById('left-out');
-        this.rightInBtn = document.getElementById('right-in');
-        this.rightOutBtn = document.getElementById('right-out');
-        this.textArea = document.getElementById('text');
-        this.box = document.getElementsByClassName('box')[0];
+        this.leftInBtn = $('#left-in');
+        this.leftOutBtn = $('#left-out');
+        this.rightInBtn = $('#right-in');
+        this.rightOutBtn = $('#right-out');
+        this.textArea = $('#text');
+        this.box = $('.box')[0];
 
-        this.wrapper = document.getElementsByClassName('wrapper')[0];
+        this.wrapper = $('.wrapper')[0];
 
+        this.sort = new Sort.sort();
 
         Utils.addHandler(this.wrapper, 'click', function(e) {
             e = Utils.getEvent(e);
-
             Utils.preventDefault(e);
             Utils.stopPropagation(e);
-            if (Utils.getTarget(e).type === 'button') {
+            var target = Utils.getTarget(e);
+
+            if (target.type === 'button' && target.id !== 'generate' && target.id !== 'bubble-sort-btn') {
                 var value = me.textArea.value;
                 if (value === '') {
                     return;
                 }
                 value = parseInt(value);
 
-                var id = e.target.id;
+                var id = target.id;
                 if (id === 'left-in') {
                     me.leftIn(parseInt(me.textArea.value));
                 } else if (id === 'right-in') {
@@ -94,6 +165,13 @@
                 } else {
                     throw ('type error');
                 }
+            }
+
+            if (target.id === 'generate') {
+                me.generateNumbers();
+            }
+            if (target.id == 'bubble-sort-btn') {
+                me.bubbleSort();
             }
         }).addHandler(this.textArea, 'keypress', function(e) {
             e = Utils.getEvent(e);
@@ -109,8 +187,8 @@
                 Utils.preventDefault(e);
             }
         });
-        //为每个数字绑定事件
 
+        //为每个数字绑定事件
         Utils.addHandler(this.box, 'click', function(e) {
             e = Utils.getEvent(e);
             var target = Utils.getTarget(e);
@@ -130,24 +208,31 @@
                     };
                 }
                 var index = Array.prototype.indexOf.apply(target.parentNode.childNodes, [target, 0]);
-                me.data.splice(index - 1, 1);
-                me.removeItem(index);
+                me.data.splice(index, 1);
+                me.removeItem(index + 1);
             }
         });
     }
 
     queue.prototype = {
+        bubbleSort: function() {
+            this.sort.bubbleSort(this.data, $('.number'));
+        },
         leftIn: function(number) {
-            this.data.unshift(number);
-            this.insertFromLeft(number);
+            if (this.data.length < 60) {
+                this.data.unshift(number);
+                this.insertFromLeft(number);
+            }
         },
         leftOut: function() {
             this.data.shift();
             this.removeFirst();
         },
         rightIn: function(number) {
-            this.data.push(number);
-            this.insertFromRight(number);
+            if (this.data.length < 60) {
+                this.data.push(number);
+                this.insertFromRight(number);
+            }
         },
         rightOut: function() {
             this.data.pop();
@@ -158,7 +243,16 @@
             var newItem = document.createElement('div');
 
             newItem.className = 'number';
-            newItem.innerText = number;
+            newItem.style.height = number + 'px';
+            newItem.style.left = 0 + 'px';
+
+            var numbers = document.getElementsByClassName('number');
+
+            for (var i = 0; i < numbers.length; i++) {
+                var left = parseInt(numbers[i].style.left);
+                numbers[i].style.left = left + 20 + 'px';
+            }
+
 
             this.box.insertBefore(newItem, oldItem);
         },
@@ -166,6 +260,10 @@
             var doc = document.getElementsByClassName('number');
             if (doc.length) {
                 this.box.removeChild(doc[0]);
+                for (var i = 0; i < doc.length; i++) {
+                    var left = parseInt(doc[i].style.left);
+                    doc[i].style.left = left - 20 + 'px';
+                }
             }
         },
         insertFromRight: function(number) {
@@ -174,7 +272,8 @@
                 var newItem = document.createElement('div');
 
                 newItem.className = 'number';
-                newItem.innerText = number;
+                newItem.style.left = $('.number').length * 20 + 'px';
+                newItem.style.height = number + 'px';
 
                 doc[0].appendChild(newItem);
             }
@@ -190,7 +289,26 @@
             if (doc.length) {
                 this.box.removeChild(doc[idx - 1]);
             }
+        },
+        generateNumbers: function() {
+            this.data.length = 0;
+            for (var i = 0; i < 50; i++) {
+                this.data.push(Math.floor(Math.random() * 90 + 10));
+            }
+            this.renderRandomNumbers();
+            //每次生成新数组要重置sort的属性
+            this.sort.reset();
+        },
+        renderRandomNumbers: function() {
+            this.box.innerHTML = "";
+            for (var i = 0, length = this.data.length; i < length; i++) {
+                var number = document.createElement('div');
+                number.className = 'number';
+                number.style.left = i * 20 + "px";
+                number.style.height = this.data[i] + 'px';
+                this.box.appendChild(number);
+            }
         }
     };
-    new queue();
+    var tQueue = new queue();
 })();
