@@ -3,10 +3,10 @@
         return element.indexOf('#') === 0 ? document.querySelector(element) : document.querySelectorAll(element);
     };
 
-    $.prototype.each=function(element,obj) {
+    $.prototype.each = function(element, obj) {
         for (var i = 0; i < element.length; i++) {
             for (var key in obj) {
-                element[i][key]=obj[key];
+                element[i][key] = obj[key];
             }
         }
     };
@@ -19,7 +19,7 @@
         sort.prototype = {
             reset: function() {
                 clearInterval(window.animation);
-                $.prototype.each($('.lr-ctrl-btn'),{
+                $.prototype.each($('.lr-ctrl-btn'), {
                     disabled: false
                 });
                 this.done = false;
@@ -45,6 +45,11 @@
                         }
                     }
                 }
+                this.animation(elements);
+            },
+            animation: function(elements) {
+                var me = this;
+
                 var count = 0;
 
                 var parent = elements[0].parentNode;
@@ -68,7 +73,7 @@
                     if (count === me.seq.length) {
                         me.done = true;
                         alert('done');
-                        $.prototype.each($('.lr-ctrl-btn'),{
+                        $.prototype.each($('.lr-ctrl-btn'), {
                             disabled: false
                         });
                         clearInterval(window.animation);
@@ -232,7 +237,7 @@
     queue.prototype = {
         bubbleSort: function() {
             //禁用按钮
-            $.prototype.each($('.lr-ctrl-btn'),{
+            $.prototype.each($('.lr-ctrl-btn'), {
                 disabled: true
             });
             this.sort.bubbleSort(this.data, $('.number'));
