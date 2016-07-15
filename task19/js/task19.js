@@ -3,6 +3,14 @@
         return element.indexOf('#') === 0 ? document.querySelector(element) : document.querySelectorAll(element);
     };
 
+    $.prototype.each=function(element,obj) {
+        for (var i = 0; i < element.length; i++) {
+            for (var key in obj) {
+                element[i][key]=obj[key];
+            }
+        }
+    };
+
     var Sort = (function() {
         function sort() {
             this.seq = [];
@@ -10,6 +18,10 @@
         }
         sort.prototype = {
             reset: function() {
+                clearInterval(window.animation);
+                $.prototype.each($('.lr-ctrl-btn'),{
+                    disabled: false
+                });
                 this.done = false;
                 this.seq.length = 0;
             },
@@ -56,6 +68,9 @@
                     if (count === me.seq.length) {
                         me.done = true;
                         alert('done');
+                        $.prototype.each($('.lr-ctrl-btn'),{
+                            disabled: false
+                        });
                         clearInterval(window.animation);
                     }
 
@@ -155,9 +170,9 @@
 
                 var id = target.id;
                 if (id === 'left-in') {
-                    me.leftIn(parseInt(me.textArea.value));
+                    me.leftIn(value);
                 } else if (id === 'right-in') {
-                    me.rightIn(parseInt(me.textArea.value));
+                    me.rightIn(value);
                 } else if (id === 'left-out') {
                     me.leftOut();
                 } else if (id === 'right-out') {
@@ -216,6 +231,10 @@
 
     queue.prototype = {
         bubbleSort: function() {
+            //禁用按钮
+            $.prototype.each($('.lr-ctrl-btn'),{
+                disabled: true
+            });
             this.sort.bubbleSort(this.data, $('.number'));
         },
         leftIn: function(number) {
@@ -239,16 +258,16 @@
             this.removeLast();
         },
         insertFromLeft: function(number) {
-            var oldItem = document.getElementsByClassName('number')[0];
+            var oldItem = $('.number')[0];
             var newItem = document.createElement('div');
 
             newItem.className = 'number';
             newItem.style.height = number + 'px';
             newItem.style.left = 0 + 'px';
 
-            var numbers = document.getElementsByClassName('number');
+            var numbers = $('.number');
 
-            for (var i = 0; i < numbers.length; i++) {
+            for (var i = 0, length = numbers.length; i < length; i++) {
                 var left = parseInt(numbers[i].style.left);
                 numbers[i].style.left = left + 20 + 'px';
             }
@@ -257,7 +276,7 @@
             this.box.insertBefore(newItem, oldItem);
         },
         removeFirst: function() {
-            var doc = document.getElementsByClassName('number');
+            var doc = $('.number');
             if (doc.length) {
                 this.box.removeChild(doc[0]);
                 for (var i = 0; i < doc.length; i++) {
@@ -267,7 +286,7 @@
             }
         },
         insertFromRight: function(number) {
-            var doc = document.getElementsByClassName('box');
+            var doc = $('.box');
             if (doc.length) {
                 var newItem = document.createElement('div');
 
@@ -279,13 +298,13 @@
             }
         },
         removeLast: function() {
-            var doc = document.getElementsByClassName('number');
+            var doc = $('.number');
             if (doc.length) {
                 this.box.removeChild(doc[doc.length - 1]);
             }
         },
         removeItem: function(idx) {
-            var doc = document.getElementsByClassName('number');
+            var doc = $('.number');
             if (doc.length) {
                 this.box.removeChild(doc[idx - 1]);
             }
