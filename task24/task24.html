@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            height: 500px;
+        }
+
+
+        #super,[class^="sub"]{
+          display: flex;
+          width: 100%;
+          margin: 10px;
+          border: 1px solid black;
+          background-color: #fff;
+        }
+        .controller-wrapper{
+          width: 100%;
+          height: 200px;
+          position: fixed;
+          bottom:0px;
+          left: 500px;
+        }
+        .controller-wrapper input{
+          width: 100px;
+          height: 30px;
+          box-shadow: 2px 2px 2px,-2px -2px 2px;
+        }
+        .controller-wrapper #search-text,#add-text{
+          height: 20px;
+        }
+        .selected{
+          background-color: pink !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-wrapper">
+        <div class="container" id="super">
+            Super
+            <div class="sub-1">
+                Cat
+                <div class="sub-2">
+                    Apple
+                    <div class="sub-3">Pear</div>
+                    <div class="sub-3">Pig</div>
+                    <div class="sub-3">Cola</div>
+                    <div class="sub-3">Soccer</div>
+                </div>
+                <div class="sub-2">
+                    Phone
+                </div>
+                <div class="sub-2">
+                    <div class="sub-3">Book</div>
+                    <div class="sub-3">School</div>
+                </div>
+            </div>
+            <div class="sub-1">
+                Note
+                <div class="sub-2">
+                    Human
+                    <div class="sub-3">Code</div>
+                    <div class="sub-3">Operate</div>
+                    <div class="sub-3">Man</div>
+                </div>
+                <div class="sub-2">
+                    Program
+                    <div class="sub-3">
+                        Bement
+                        <div class="sub-4">Cat</div>
+                    </div>
+                    <div class="sub-3">Glass</div>
+                </div>
+            </div>
+            <div class="sub-1">Fish</div>
+        </div>
+    </div>
+    <div class="controller-wrapper">
+        <input type="button" value="开始遍历" id="start-btn">
+        <select name="controller-ops" id="ops">
+            <option value="dfs" selected="selected">DFS</option>
+            <option value="bfs">BFS</option>
+            <option value="level">层次遍历</option>
+        </select>
+        <input type="text" id="search-text">
+        <input type="button" id="search" value="查询">
+        <input type="text" id="add-text">
+        <input type="button" id="add" value=增加>
+        <input type="button" id="del" value=删除>
+    </div>
+    <script src="js/task24.js"></script>
+</body>
+
+</html>
