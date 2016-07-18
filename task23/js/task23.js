@@ -45,10 +45,6 @@
         }
     };
 
-
-
-
-
     function Node(data) {
         this.data = data;
         this.parent = null;
@@ -68,8 +64,6 @@
                 }
                 callback(currentNode);
             })(this._root);
-            //加入根节点
-            // callback(this._root);
         },
         traverseBF: function(callback) {
             var queue = new Queue();
@@ -117,7 +111,6 @@
     var list = [];
     var root = $('#super');
     var tree = new Tree($('.container-wrapper')[0]);
-    // Tree.prototype.add.apply(tree,[root.firstElementChild,root,tree.traverseDF]);
 
     //重置属性
     function reset() {
@@ -161,7 +154,7 @@
                 }]);
                 paint(1, list.length - 1);
             } else {
-                throw ("type error");
+                throw new Error("type error");
             }
         });
 
@@ -180,47 +173,37 @@
             var choice = ops[option].value;
 
             if (choice === "dfs") {
-
                 Tree.prototype.traverseDF.apply(tree, [function(node) {
-                    if (node.innerText) {
-                        if (node.innerText.split(/[\s]/)[0] === value) {
-                            node.isTarget = true;
-                        }
-                        list.push(node);
-                    }
+                    callbacl4Search(node)(value);
                 }]);
                 paint(0, list.length - 1);
             } else if (choice === "bfs") {
                 Tree.prototype.traverseBF.apply(tree, [function(node) {
-                    if (node.innerText) {
-                        if (node.innerText.split(/[\s]/)[0] === value) {
-                            node.isTarget = true;
-                        }
-                        list.push(node);
-                    }
+                    callbacl4Search(node)(value);
                 }]);
                 paint(0, list.length - 1);
             } else if (choice === "level") {
-                Tree.prototype.traverseLevel.apply(tree, [function(node){
-                  callbacl4Search(node)(value);
+                Tree.prototype.traverseLevel.apply(tree, [function(node) {
+                    callbacl4Search(node)(value);
                 }]);
-                paint(1, list.length - 1);
+                paint(0, list.length - 1);
             } else {
                 throw new Error('Error Type');
             }
-
         });
     };
-    function callbacl4Search(node){
-      return function(value){
-        if (node.innerText) {
-            if (node.innerText.split(/[\s]/)[0] === value) {
-                node.isTarget = true;
+
+    function callbacl4Search(node) {
+        return function(value) {
+            if (node.innerText) {
+                if (node.innerText.split(/[\s]/)[0] === value) {
+                    node.isTarget = true;
+                }
+                list.push(node);
             }
-            list.push(node);
-        }
-      };
+        };
     }
+
     function getChildNodes(node) {
         var children = [];
         for (var i = 0; i < node.childNodes.length; i++) {
