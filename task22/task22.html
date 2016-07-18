@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+        }
+
+        #super,
+        .sub-1,
+        .sub-2,
+        .sub-3 {
+            display: flex;
+            width: 100%;
+            margin: 10px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="super">
+        <div class="sub-1">
+            <div class="sub-2">
+                <div class="sub-3"></div>
+                <div class="sub-3"></div>
+            </div>
+            <div class="sub-2">
+                <div class="sub-3"></div>
+                <div class="sub-3"></div>
+            </div>
+        </div>
+        <div class="sub-1">
+            <div class="sub-2">
+                <div class="sub-3"></div>
+                <div class="sub-3"></div>
+            </div>
+            <div class="sub-2">
+                <div class="sub-3"></div>
+                <div class="sub-3"></div>
+            </div>
+        </div>
+    </div>
+    <div class="controller-wrapper">
+        <input type="button" value="开始遍历" id="start-btn">
+        <select name="controller-ops" id="ops">
+            <option value="first" selected="selected">先序遍历</option>
+            <option value="mid">中序遍历</option>
+            <option value="after">后序遍历</option>
+        </select>
+    </div>
+    <script src="js/task22.js"></script>
+</body>
+
+</html>

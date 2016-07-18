@@ -8,3 +8,5 @@ practices on baidu-ife 2016 spring tasks
 [任务19点击这里](http://irongit.github.io/task19.html)
 
 [任务20点击这里](http://irongit.github.io/task20.html)
+
+[任务22点击这里](http://irongit.github.io/task22.html)
