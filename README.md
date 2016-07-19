@@ -14,3 +14,5 @@ practices on baidu-ife 2016 spring tasks
 [任务23点击这里](http://irongit.github.io/task23.html)
 
 [任务24点击这里](http://irongit.github.io/task24.html)
+
+[任务25点击这里](http://irongit.github.io/task25.html)
