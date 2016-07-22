@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="css/control.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="css/console.css" media="screen" title="no title" charset="utf-8">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="universe">
+            <div class="earth"></div>
+            <div class="track track-1">
+                <div class="ship-wrapper">
+                    <div class="ship-1">
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="track track-2">
+                <div class="ship-wrapper">
+                    <div class="ship-2">
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="track track-3">
+                <div class="ship-wrapper">
+                    <div class="ship-3">
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--控制台(输出信息)-->
+        <div class="console">
+            <div class="console-entity"></div>
+        </div>
+        <!--控制区域-->
+        <div class="controller">
+            <div class="control-4-ship control-4-ship-1" data="ship-1">
+                <h3>一号飞船</h3>
+                <input type="button" value="创建飞船" class="create-ship-btn">
+                <input type="button" value="启动飞船" class="launch-ship-btn" disabled="disabled">
+            </div>
+            <div class="control-4-ship control-4-ship-2" data="ship-2">
+                <h3>二号飞船</h3>
+                <input type="button" value="创建飞船" class="create-ship-btn">
+                <input type="button" value="启动飞船" class="launch-ship-btn" disabled="disabled">
+            </div>
+            <div class="control-4-ship control-4-ship-3" data="ship-3">
+                <h3>三号飞船</h3>
+                <input type="button" value="创建飞船" class="create-ship-btn">
+                <input type="button" value="启动飞船" class="launch-ship-btn" disabled="disabled">
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-3.1.0.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/log.js"></script>
+    <script src="js/mediator.js"></script>
+    <script src="js/shipfactory.js"></script>
+    <script src="js/commander1.js"></script>
+    <script src="js/ship.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

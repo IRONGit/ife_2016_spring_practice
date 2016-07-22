@@ -1,0 +1,92 @@
+$earthTop: 150px;
+$earthWidth: 200px;
+$distance: 50px;
+$shipWidth:50px;
+$shipHeight:20px;
+* {
+    margin: 0;
+    height: 0;
+}
+body,
+html {
+    height: 100%;
+    background: linear-gradient(top, #222, #333);
+    background: -webkit-linear-gradient(top, #222, #333);
+    background: -moz-linear-gradient(top, #222, #333);
+}
+.wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.controller {
+    width: 100%;
+    height: 10%;
+    position: fixed;
+    // background: blue;
+    bottom: 0;
+    opacity: 0.5;
+}
+.console{
+  width: 300px;
+  height: 90%;
+  // background: yellow;
+  position: fixed;
+  right: 0;
+  bottom:10%;
+}
+.universe {
+    width: 100%;
+    height: 95%;
+    position: absolute;
+    top:5%;
+}
+.earth {
+    width: $earthWidth;
+    height: $earthWidth;
+    border-radius: $earthWidth / 2;
+    background: #ccc;
+    position: absolute;
+    top: $earthTop;
+    left: 50%;
+    margin-left: - $earthWidth/2;
+}
+.track {
+  border: 1px solid #ccc;
+      position: absolute;
+          left: 50%;
+}
+.track-1 {
+    width: $earthWidth+2*$distance;
+    height: $earthWidth+2*$distance;
+    top: $earthTop - $distance;
+    margin-left: -($earthWidth+2*$distance)/2;
+    border-radius: ($earthWidth+2*$distance)/2;
+}
+.track-2 {
+      width: $earthWidth+4*$distance;
+      height: $earthWidth+4*$distance;
+      top: $earthTop - 2*$distance;
+      margin-left: -($earthWidth+4*$distance)/2;
+      border-radius: ($earthWidth+4*$distance)/2;
+}
+.track-3 {
+  width: $earthWidth+6*$distance;
+  height: $earthWidth+6*$distance;
+  top: $earthTop - 3*$distance;
+  margin-left: -($earthWidth+6*$distance)/2;
+  border-radius: ($earthWidth+6*$distance)/2;
+}
+
+.ship-wrapper{
+  width: $shipWidth;
+  height: $shipHeight;
+  background: red;
+  position: relative;
+  border-radius: 15px;
+  left: 50%;
+  margin-left: -$shipWidth/2;
+  top: -$shipHeight/2;
+  text-align: center;
+  display: none;
+}
