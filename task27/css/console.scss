@@ -1,0 +1,18 @@
+.console-entity{
+  width: 90%;
+  height:98%;
+  position: absolute;
+  background: transparent;
+  bottom: 0;
+  margin: 0 5%;
+  overflow: scroll;
+}
+
+.console-entity p{
+  height: auto;
+  color: #fff;
+  font-family:"Microsoft Yahei Helvetica Arial";
+}
+.console-entity span{
+  font-family: "Helvetica Arial";
+}
