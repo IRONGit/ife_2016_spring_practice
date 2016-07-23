@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="css/control.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="css/console.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="css/monitor.css" media="screen" title="no title" charset="utf-8">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="universe">
+            <div class="earth"></div>
+            <div class="track track-1">
+                <div class="ship-wrapper">
+                    <div class="ship-1">
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="track track-2">
+                <div class="ship-wrapper">
+                    <div class="ship-2">
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="track track-3">
+                <div class="ship-wrapper">
+                    <div class="ship-3">
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--控制台(输出信息)-->
+        <div class="console">
+            <div class="console-entity"></div>
+        </div>
+        <!--控制区域-->
+        <div class="controller">
+            <div class="control-4-ship control-4-ship-1" data="ship-1">
+                <h3>一号飞船</h3>
+                <input type="button" value="创建飞船" class="create-ship-btn" disabled="disabled">
+                <input type="button" value="启动飞船" class="launch-ship-btn" disabled="disabled">
+            </div>
+            <div class="control-4-ship control-4-ship-2" data="ship-2">
+                <h3>二号飞船</h3>
+                <input type="button" value="创建飞船" class="create-ship-btn" disabled="disabled">
+                <input type="button" value="启动飞船" class="launch-ship-btn" disabled="disabled">
+            </div>
+            <div class="control-4-ship control-4-ship-3" data="ship-3">
+                <h3>三号飞船</h3>
+                <input type="button" value="创建飞船" class="create-ship-btn" disabled="disabled">
+                <input type="button" value="启动飞船" class="launch-ship-btn" disabled="disabled">
+            </div>
+        </div>
+        <div class="selection-wrapper">
+            <form action="">
+                <fieldset class="fieldset">
+                    <legend>型号选择</legend>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动力系统选择
+                    <input type="radio" name="power" id="type1" class='option-select' />
+                    <label for="type1">前进号(速率30px/s,能耗5%/s)</label>
+                    <input type="radio" name="power" id="type2" class='option-select' />
+                    <label for="type2">奔腾号(速率50px/s,能耗7%/s)</label>
+                    <input type="radio" name="power" id="type3" class='option-select' />
+                    <label for="type3">超越号(速率80px/s,能耗9%/s)</label>
+                    <!-- <br> -->
+                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;能源系统选择
+                    <input type="radio" name="energy" id="type4" class='option-select' />
+                    <label for="type4">劲量型(补充能源速度2%/s)</label>
+                    <input type="radio" name="energy" id="type5" class='option-select' />
+                    <label for="type5">光能型(补充能源速度3%/s)</label>
+                    <input type="radio" name="energy" id="type6" class='option-select' />
+                    <label for="type6">永久型(补充能源速度4%/s)</label>
+
+                </fieldset>
+            </form>
+        </div>
+        <div class="monitor-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>飞船</th>
+                        <th>动力系统</th>
+                        <th>能源系统</th>
+                        <th>当前飞行状态</th>
+                        <th>剩余能耗</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <script src="js/jquery-3.1.0.js"></script>
+    <script src="js/transmitter.js"></script>
+    <script src="js/adapter.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/log.js"></script>
+    <script src="js/mediator.js"></script>
+    <script src="js/datacenter.js"></script>
+    <script src="js/shipfactory.js"></script>
+    <script src="js/commander.js"></script>
+    <script src="js/ship.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
